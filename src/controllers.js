@@ -82,4 +82,21 @@ router.get("/history", async function (req, res) {
     return res.send({ result: "No implementado" });
 });
 
+router.get("/pow/:a/:b", async function (req, res) {
+    const params = req.params;
+    const a = Number(params.a);
+    const b = Number(params.b);
+    const result = a ** b;
+            
+    await Operation.create({
+        type: "POW",
+        args: {  
+            a: a,
+            b: b,
+        },
+        result,
+    });
+    return res.send({ result });
+});       
+
 module.exports = router;
